@@ -1,0 +1,38 @@
+// só sabo q nada sabo
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Api Debugger</title>
+</head>
+<body>
+    <div>
+    <input name="url">
+    <select name="method">
+        <option value='GET'>GET</option>
+        <option value='POST'>POST</option>
+        <option value='PUT'>PUT</option>
+        <option value='DELETE'>DELETE</option>
+    </select>
+    <textarea name="body"></textarea>
+    <button id="execute">Executar</button>
+</div>
+<pre id="result">Resultado aqui</pre>
+<script>
+    const eUrl = document.querySelector('(name="url")');
+    const eMethod = document.querySelector('(name="method")');
+    const eBody = document.querySelector('(name="body")');
+    const btExecute = document.querySelector('#execute');
+    const result = document.querySelector('#result');
+    btExecute.addEventListener('click', async ev => {
+       const request = await fetch(eUrl.value, {
+           method: eMethod.value,
+           body: eBody.value.trim() === '' ? undefined : eBody.value
+       })
+       const response = await request.text()
+       result.innerHTML = response
+    })
+
+</script>
+</body>
+</html>
